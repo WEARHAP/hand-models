@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="forth_hand">
+
+	<xacro:include filename="$(find forth_hand_description)/model/forth_hand.urdf.xacro"/>
+
+	<link name="box">
+		<inertial>
+			<mass value="50.0"/>
+			<inertia  ixx="1" ixy="0.00"  ixz="0.00" iyy="1" iyz="0.00" izz="1" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0.50" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.0 1.0 1.0"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0.50" rpy="0 0 0"/>
+			<geometry>
+				<box size="1.0 1.0 1.0"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<gazebo reference="box">
+		<static>true</static>
+	</gazebo>
+
+	<xacro:forth_hand parent="box" name="forth_hand" withAdaptiveTransmission="true" useMimicTag="$(arg use_mimic_tag)" left="false">
+		<origin xyz="0.0 0.0 1.02" rpy="0 0 0"/>
+	</xacro:forth_hand>
+
+	<!-- a wall to test the adaptivity 
+	<joint name="box_object_joint" type="fixed">
+		<origin xyz="0.06 0 1.15" rpy="0 0 0" />
+		<parent link="box"/>
+		<child link="object"/>
+	</joint>
+
+	<link name="object">
+		<inertial>
+			<mass value="50.0"/>
+			<inertia  ixx="1" ixy="0.00"  ixz="0.00" iyy="1" iyz="0.00" izz="1" />
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="0.05 0.07 0.25"/>
+			</geometry>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.05 0.07 0.25"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<gazebo reference="object">
+		<selfCollide>True</selfCollide>
+	</gazebo>
+	-->
+
+</robot>
