@@ -4,22 +4,22 @@
 	<xacro:include filename="$(find pisa_hand_description)/model/pisa_hand.urdf.xacro"/>
 
 	<link name="box">
-		<inertial>
+		<!-- <inertial>
 			<mass value="50.0"/>
 			<inertia  ixx="1" ixy="0.00"  ixz="0.00" iyy="1" iyz="0.00" izz="1" />
-		</inertial>
+		</inertial> -->
 		<visual>
 			<origin xyz="0 0 0.50" rpy="0 0 0"/>
 			<geometry>
 				<box size="1.0 1.0 1.0"/>
 			</geometry>
 		</visual>
-		<collision>
+		<!-- <collision>
 			<origin xyz="0 0 0.50" rpy="0 0 0"/>
 			<geometry>
 				<box size="1.0 1.0 1.0"/>
 			</geometry>
-		</collision>
+		</collision> -->
 	</link>
 <!--
 	<joint name="box_wrist_left_joint" type="fixed">
@@ -85,7 +85,7 @@
 
 
 	<link name="wrist_right">
-		<inertial>
+		<!-- <inertial>
 			<mass value="1.0"/>
 			<inertia  ixx="0.01" ixy="0.00"  ixz="0.00" iyy="0.01" iyz="0.00" izz="0.01" />
 		</inertial>
@@ -99,10 +99,10 @@
 			<geometry>
 				<mesh filename="package://pisa_hand_description/meshes/coman_coupler_right.stl" scale=" .001 .001 .001" />
 			</geometry>
-		</collision>
+		</collision> -->
 	</link>
 
-	<xacro:pisa_hand parent="wrist_right" name="pisa_hand_right" withAdaptiveTransmission="true" useMimicTag="$(arg use_mimic_tag)" left="false">
+	<xacro:pisa_hand parent="wrist_right" name="pisa_hand_right" left="false">
 		<origin xyz="0.002 0.009 0.038" rpy="0 0 0"/>
 	</xacro:pisa_hand>
 

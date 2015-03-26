@@ -1,27 +1,11 @@
-Soft Hand model
+Pisa Hand Model
 ===============
 
-If you want to use the Pisa/IIT soft hand in your URDF, you can do so by including the model:
+If you want to use the Pisa model hand, yuo can move pisa_hand_description and pisa_hand_publisher folders in your catkin_ws and launch it with "roslaunch pisa_hand_description display.launch" by terminal.
 
-`<xacro:include filename="$(find pisa_hand_description)/model/pisa_hand.urdf.xacro"/>`
+You can select the visual mode, modifing the line #6 in pisa_hand_description/launch/display.launch :
 
-And then, using as many hands as you want as:
+<arg name="use_joint_state_publisher" default="false"/> : in this mode,the model hand has 18 dof (15 fot the hand), because the distal phalange of index, middle,ring and little finghers, and middle abduction are zero. You will see the visualitation of the angles data written in "data.txt" (you can modifie this file, remembering that the number of columnes must be 15 and it's better that the number of rows is equal to "campioni" variable at line #39
+in pisa_hand_publisher/src/pisa_hand_publisher.cpp).
 
-```
-<xacro:pisa_hand name="MYHAND" parent="PARENT" 
-                 withAdaptiveTransmission="true" useMimicTag="false" left="true">
-  <origin xyz="0 0 0" rpy="0 0 0"/>
-</xacro:pisa_hand>
-```
-Where:
-
-`name` is the name of your hand, it is useful for namespaces, controllers, etc.
-
-`parent` is the link you are attaching your hand to, placed at `<origin...`
-
-`withAdaptiveTransmission` used  for simulation purposes for now.
-
-`useMimicTag` is to have only one joint that controls all joints in a pure-kinematics-like motion, it affects only the visualization. In simulation, the mimicking is done by the hardware interface, and in real, you only have one motor reading.
-
-`left` is to define whether you are using a right or left hand.
-
+<arg name="use_joint_state_publisher" default="true"/> : in this mode, the model hand has 23 dof and you have a GUI, in which you can modify the value of each hand joint as you prefer.
